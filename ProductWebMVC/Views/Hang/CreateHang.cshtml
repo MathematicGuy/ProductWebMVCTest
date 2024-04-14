@@ -1,0 +1,36 @@
+﻿@model ProductWebMVC.Models.HangHoa
+
+@{
+}
+
+<div class="container-fluid">
+    <h1>Create New Hang Hoa</h1>
+
+    <form method="post" asp-action="CreateHang">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ma_hang_hoa" class="control-label"></label>
+            <input asp-for="ma_hang_hoa" class="form-control" />
+            <span asp-validation-for="ma_hang_hoa" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ten_hang_hoa" class="control-label"></label>
+            <input asp-for="ten_hang_hoa" class="form-control" />
+            <span asp-validation-for="ten_hang_hoa" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="so_luong" class="control-label"></label>
+            <input asp-for="so_luong" class="form-control" />
+            <span asp-validation-for="so_luong" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ghi_chu" class="control-label"></label>
+            <input asp-for="ghi_chu" class="form-control" />
+            <span asp-validation-for="ghi_chu" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

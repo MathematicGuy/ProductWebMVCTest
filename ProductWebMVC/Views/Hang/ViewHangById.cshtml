@@ -1,0 +1,42 @@
+﻿@model ProductWebMVC.Models.HangHoa
+
+@{
+}
+
+<!-- Get Hang by id -->
+<div class="container-fluid">
+    <h1>View Hang Hoa by Id</h1>
+
+    <form method="get" asp-action="ViewHangById">
+        <div class="form-group">
+            <label asp-for="Id">Hang Hoa ID:</label>
+            <input asp-for="Id" type="number" class="form-control" />
+            <input type="submit" value="View by Id" class="btn btn-primary" /> 
+        </div>
+    </form>
+
+    @if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Id</td>
+                    <td>@Model.ma_hang_hoa</td>
+                    <td>@Model.ten_hang_hoa</td>
+                    <td>@Model.so_luong</td>
+                    <td>@Model.ghi_chu</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    
+</div>

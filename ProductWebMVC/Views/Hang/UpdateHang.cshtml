@@ -1,0 +1,63 @@
+﻿@model ProductWebMVC.Models.HangHoa
+
+@{
+}
+
+<div class="container-fluid">
+    <h1>Update Hang Hoa</h1>
+
+    @if (Model != null)
+    {
+        <form method="post" asp-action="UpdateHang"> 
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" readonly/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ma_hang_hoa" class="control-label"></label>
+                <input asp-for="ma_hang_hoa" class="form-control" />
+                <span asp-validation-for="ma_hang_hoa" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="ten_hang_hoa" class="control-label"></label>
+                <input asp-for="ten_hang_hoa" class="form-control" />
+                <span asp-validation-for="ten_hang_hoa" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="so_luong" class="control-label"></label>
+                <input asp-for="so_luong" class="form-control" />
+                <span asp-validation-for="so_luong" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="ghi_chu" class="control-label"></label>
+                <input asp-for="ghi_chu" class="form-control" />
+                <span asp-validation-for="ghi_chu" class="text-danger"></span>
+            </div>
+
+            <!-- Update & Delete Btn -->
+            <div class="mb-3 d-flex">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <button type="submit" class="btn btn-danger ms-2"
+                        asp-area=""
+                        asp-controller="Hang"
+                        asp-action="DeleteHang">
+                    Delete
+                </button>
+            </div>
+
+        </form>
+    }
+    else
+    {
+        <div>No Model Exist !</div>
+    }
+</div>

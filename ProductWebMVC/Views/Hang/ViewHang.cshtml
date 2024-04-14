@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProductWebMVC.Models.HangHoa>
+
+@{
+    ViewData["Title"] = "ViewHang";
+}
+ 
+<!-- The website JavaScript file -->
+<h1>View Hang</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Note</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var HangHoa in Model)
+        {
+            <tr>
+                <td>@HangHoa.ma_hang_hoa</td>
+                <td>@HangHoa.ten_hang_hoa</td>
+                <td>@HangHoa.so_luong</td>
+                <td>@HangHoa.ghi_chu</td>
+                <td>
+                    <a asp-area=""
+                       asp-controller="Hang"
+                       asp-action="UpdateHang"
+                       asp-route-id="@HangHoa.Id">Edit</a>  <!-- Pass clck Id to path-->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
