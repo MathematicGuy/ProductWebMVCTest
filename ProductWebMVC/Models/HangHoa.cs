@@ -6,10 +6,12 @@ namespace ProductWebMVC.Models
     public class HangHoa
     {
         //[Required(ErrorMessage = "Mã hàng hóa is required")]
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Mã hàng hóa is required")]
-        public int ma_hang_hoa { get; set; }
+        [StringLength(9, ErrorMessage = "Mã hàng hóa cannot exceed 9 characters")] // Update!
+        public string ma_hang_hoa { get; set; }
 
         [Required(ErrorMessage = "Tên hàng hóa is required")]
         public string ten_hang_hoa { get; set; }
@@ -20,7 +22,6 @@ namespace ProductWebMVC.Models
 
         //[Required(ErrorMessage = "Tên hàng hóa is required")]
         public string? ghi_chu { get; set; }
-
     }
 }
 

@@ -1,0 +1,29 @@
+﻿@model ProductWebMVC.Models.HangHoa
+@{ 
+    ViewData["Title"] = "Update Ghi Chu";
+}
+
+<h2>Update Ghi Chu</h2>
+
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@ViewData["ErrorMessage"]</div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form method="post" asp-action="UpdateGhiChu">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="ghi_chu" class="control-label"></label>
+        <input asp-for="ghi_chu" class="form-control" />
+        <span asp-validation-for="ghi_chu" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Update" class="btn btn-primary" />
+
+</form>

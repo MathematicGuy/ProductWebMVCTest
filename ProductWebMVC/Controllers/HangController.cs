@@ -15,12 +15,13 @@ namespace ProductWebMVC.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        // http://heval1st-001-site1.anytempurl.com/api/Hang/GetAllHang
+        // https://heval1st-001-site1.anytempurl.com/api/Hang
         // declare global API
-        
+
         public async Task<IActionResult> ViewHang()
         {
             var httpClient = _httpClientFactory.CreateClient();
+        
             var response = httpClient.GetAsync("https://heval1st-001-site1.anytempurl.com/api/Hang/GetAllHang").Result;
             Console.WriteLine(response);
 
@@ -125,10 +126,23 @@ namespace ProductWebMVC.Controllers
             }
             else
             {
-                // Handle the error
-                return View(); // Example error handling
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+                if (errorResponse != null)
+                {
+                    // Add error messages to ViewData or ModelState
+                    ViewData["ErrorMessages"] = errorResponse.Details;
+                }
+                else
+                {
+                    // Handle unexpected error
+                    ViewData["ErrorMessage"] = "An error occurred while updating.";
+                }
+                return View(hangHoa); // Pass the model back so user input is retained
             }
         }
+
+
+
 
         [HttpPost] // Important: Use HttpPost for deletions
         public async Task<IActionResult> DeleteHang(int? Id)
