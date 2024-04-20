@@ -37,7 +37,7 @@
                 <span asp-validation-for="so_luong" class="text-danger"></span>
             </div>
             
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ghi_chu" class="control-label"></label>
                 <input asp-for="ghi_chu" class="form-control" />
                 <span asp-validation-for="ghi_chu" class="text-danger"></span>
@@ -53,11 +53,9 @@
                     Delete
                 </button>
             </div>
-
         </form>
+
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     }
-    else
-    {
-        <div>No Model Exist !</div>
-    }
+    
 </div>

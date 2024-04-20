@@ -33,6 +33,11 @@
                 </td>
             </tr>
         }
+        
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="error-message">@ViewBag.ErrorMessage</div>
+        }
     </tbody>
 </table>
 

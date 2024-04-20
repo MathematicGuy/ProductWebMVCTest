@@ -9,9 +9,16 @@
 
     <form method="get" asp-action="ViewHangById">
         <div class="form-group">
-            <label asp-for="Id">Hang Hoa ID:</label>
+            <div class="d-flex">
+                <label asp-for="Id">Hang Hoa ID:</label>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="error-message ms-1 text-danger">@ViewBag.ErrorMessage</div>
+                }
+            </div>
+            
             <input asp-for="Id" type="number" class="form-control" />
-            <input type="submit" value="View by Id" class="btn btn-primary" /> 
+            <input type="submit" value="View by Id" class="btn btn-primary my-2" /> 
         </div>
     </form>
 
@@ -38,5 +45,6 @@
             </tbody>
         </table>
     }
-    
+
+
 </div>

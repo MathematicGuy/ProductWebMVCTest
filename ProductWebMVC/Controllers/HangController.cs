@@ -8,18 +8,20 @@ namespace ProductWebMVC.Controllers
 {
     public class HangController : Controller
     {
-private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClientFactory; 
 
-    public HangController(IHttpClientFactory httpClientFactory)
-    {
-        _httpClientFactory = httpClientFactory;
-    }
+        public HangController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
 
-
+        // http://heval1st-001-site1.anytempurl.com/api/Hang/GetAllHang
+        // declare global API
+        
         public async Task<IActionResult> ViewHang()
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var response = httpClient.GetAsync("https://localhost:7116/api/Hang/GetAllHang").Result;
+            var response = httpClient.GetAsync("https://heval1st-001-site1.anytempurl.com/api/Hang/GetAllHang").Result;
             Console.WriteLine(response);
 
             if (response.IsSuccessStatusCode)
@@ -27,7 +29,10 @@ private readonly IHttpClientFactory _httpClientFactory;
                 var hangHoa = await response.Content.ReadFromJsonAsync<IEnumerable<HangHoa>>();
                 return View(hangHoa);
             }
-            return View(null);
+
+
+            //ViewBag.ErrorMessage = "An error occurred. Please try again.";
+            return View();
         }
 
         [HttpGet]
@@ -41,30 +46,32 @@ private readonly IHttpClientFactory _httpClientFactory;
         {
             var httpClient = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(hangHoa), Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("https://localhost:7116/api/Hang/CreateHang", content);
+            var response = await httpClient.PostAsync("https://heval1st-001-site1.anytempurl.com/api/Hang/CreateHang", content);
 
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode) 
             {
                 return RedirectToAction("ViewHang"); // Redirect to the list view after create
             }
             else
             {
+                // Handle errors
+                ViewBag.ErrorMessage = "Input value is False, Please re-enter";
                 return View(null);
             }
         }
 
- 
 
         [HttpGet]
         public async Task<IActionResult> ViewHangById(int? Id)
         {
             if (!Id.HasValue)
             {
+                ViewBag.ErrorMessage = "Input value is False";
                 return View(); // Display initial view without data
             }
 
             var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.GetAsync($"https://localhost:7116/api/Hang/HangById{Id.Value}");
+            var response = await httpClient.GetAsync($"https://heval1st-001-site1.anytempurl.com/api/Hang/HangById{Id.Value}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -74,11 +81,10 @@ private readonly IHttpClientFactory _httpClientFactory;
             else
             {
                 // Handle error (e.g., View("Error"))
-                return View(null);
+                ViewBag.ErrorMessage = "Id Not Exist, Please enter a exist Id";
+                return View(null);  
             }
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> UpdateHang(int? Id)
@@ -89,7 +95,7 @@ private readonly IHttpClientFactory _httpClientFactory;
             }
 
             var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.GetAsync($"https://localhost:7116/api/Hang/HangById{Id}");
+            var response = await httpClient.GetAsync($"https://heval1st-001-site1.anytempurl.com/api/Hang/HangById{Id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -99,7 +105,7 @@ private readonly IHttpClientFactory _httpClientFactory;
             else
             {
                 // Handle error (e.g., View("Error"))
-                return RedirectToAction("Error");
+                return RedirectToAction("ViewHang");
             }
         }
 
@@ -110,17 +116,17 @@ private readonly IHttpClientFactory _httpClientFactory;
             Console.Write(hangHoa);
             // Serialize data appropriately for your API
             var content = new StringContent(JsonConvert.SerializeObject(hangHoa), Encoding.UTF8, "application/json");
-            var response = await httpClient.PutAsync($"https://localhost:7116/api/Hang/UpdateHang{Id}", content);
+            var response = await httpClient.PutAsync($"https://heval1st-001-site1.anytempurl.com/api/Hang/UpdateHang{Id}", content);
 
             if (response.IsSuccessStatusCode)
             {
                 // Success! Redirect or display a success message
-                return RedirectToAction("Index");  // Example redirect
+                return RedirectToAction("ViewHang");  // Example redirect
             }
             else
             {
                 // Handle the error
-                return View("Error"); // Example error handling
+                return View(); // Example error handling
             }
         }
 
@@ -128,7 +134,7 @@ private readonly IHttpClientFactory _httpClientFactory;
         public async Task<IActionResult> DeleteHang(int? Id)
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.DeleteAsync($"https://localhost:7116/api/Hang/DelelteHang{Id}");
+            var response = await httpClient.DeleteAsync($"https://heval1st-001-site1.anytempurl.com/api/Hang/DelelteHang{Id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -138,9 +144,9 @@ private readonly IHttpClientFactory _httpClientFactory;
             else
             {
                 // Handle error, e.g., display an error message
+
                 return View(null);
             }
-
         }
     
         
